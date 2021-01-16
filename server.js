@@ -1,6 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
+const express = require('express'),
+    cors = require('cors'),
+    app = express();
 
 require('./server/config/mongoose.config');
 

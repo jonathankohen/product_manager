@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const ProductForm = () => {
-    const [title, setTitle] = useState('');
-    const [price, setPrice] = useState(0);
-    const [desc, setDesc] = useState('');
+    const [title, setTitle] = useState(''),
+        [price, setPrice] = useState(0),
+        [desc, setDesc] = useState('');
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = e => {
         e.preventDefault();
         axios
-            .post('http://localhost:8000/api/products', {
+            .post('http://localhost:8000/api/products/create', {
                 title,
                 price,
                 desc,
             })
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
     };
 
     return (
@@ -24,19 +24,19 @@ const ProductForm = () => {
                 className="form-control"
                 type="text"
                 placeholder="Title"
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={e => setTitle(e.target.value)}
             />
             <input
                 className="form-control"
                 type="text"
                 placeholder="Price"
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={e => setPrice(e.target.value)}
             />
             <input
                 className="form-control"
                 type="text"
                 placeholder="Description"
-                onChange={(e) => setDesc(e.target.value)}
+                onChange={e => setDesc(e.target.value)}
             />
             <button type="submit">Add Item</button>
         </form>
