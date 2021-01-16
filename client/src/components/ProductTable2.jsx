@@ -1,19 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from '@reach/router';
 import axios from 'axios';
 
-const ProductTable = props => {
-    const { products, handleDelete } = props;
+import DeleteButton from '../components/DeleteButton';
 
-    const deleteProduct = productFormId => {
-        axios
-            .delete(
-                `http://localhost:8000/api/products/delete/${productFormId}`
-            )
-            .then(res => {
-                handleDelete(productFormId);
-            })
-            .catch(err => console.log(err));
+const ProductTable2 = props => {
+    const { products, setProducts } = props;
+
+    const removeFromDom = productId => {
+        setProducts(products.filter(product => product._id !== productId));
     };
 
     return (
@@ -38,15 +33,12 @@ const ProductTable = props => {
                                     <Link to={`/products/${product._id}`}>
                                         View
                                     </Link>
-                                    <button
-                                        type="button"
-                                        className="btn btn-sm btn-danger ml-3"
-                                        onClick={e =>
-                                            deleteProduct(product._id)
+                                    <DeleteButton
+                                        productId={product._id}
+                                        successCallback={() =>
+                                            removeFromDom(product._id)
                                         }
-                                    >
-                                        Delete
-                                    </button>
+                                    />
                                 </td>
                             </tr>
                         );
@@ -57,4 +49,4 @@ const ProductTable = props => {
     );
 };
 
-export default ProductTable;
+export default ProductTable2;

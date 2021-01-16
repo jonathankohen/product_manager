@@ -3,17 +3,17 @@ import { Router } from '@reach/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import Main from './views/Main';
+import Main2 from './views/Main2';
 import Show from './views/Show';
-import Edit from './views/Edit';
+import Edit2 from './views/Edit2';
 
 function App() {
     return (
         <div className="App">
             <Router>
-                <Main path="/" />
+                <Main2 path="/" />
                 <Show path="/products/:id" />
-                <Edit path="/products/edit/:id" />
+                <Edit2 path="/products/edit/:id" />
             </Router>
         </div>
     );

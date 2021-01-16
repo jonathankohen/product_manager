@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, navigate } from '@reach/router';
 import axios from 'axios';
 
-export default function Show(props) {
+import DeleteButton from '../components/DeleteButton';
+
+const Show = props => {
     const [product, setProduct] = useState({
         title: '',
         price: 0,
@@ -16,15 +18,6 @@ export default function Show(props) {
             .catch(err => console.log(err));
     }, [props]);
 
-    const handleDelete = () => {
-        axios
-            .delete(`http://localhost:8000/api/products/delete/${props.id}`)
-            .then(res => {
-                navigate('/');
-            })
-            .catch(err => console.log(err));
-    };
-
     return (
         <>
             <h1>{product.title}</h1>
@@ -32,13 +25,12 @@ export default function Show(props) {
             <p>{product.desc}</p>
             <Link to={`/products/edit/${product._id}`}>Edit</Link>
             <Link to="/">Go Back</Link>
-            <button
-                type="button"
-                className="btn btn-sm btn-danger"
-                onClick={handleDelete}
-            >
-                Delete
-            </button>
+            <DeleteButton
+                productId={product._id}
+                successCallback={() => navigate('/')}
+            />
         </>
     );
-}
+};
+
+export default Show;

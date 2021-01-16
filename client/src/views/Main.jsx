@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import ProductForm from '../components/ProductForm';
+import ProductForm2 from '../components/ProductForm2';
 import ProductTable from '../components/ProductTable';
 
 const Main = () => {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]),
+        [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         axios
             .get('http://localhost:8000/api/products')
-            .then(res => setProducts(res.data.results))
+            .then(res => {
+                setProducts(res.data.results);
+                setLoaded(true);
+            })
             .catch(err => console.log(err));
     }, []);
 
@@ -20,8 +24,11 @@ const Main = () => {
 
     return (
         <>
-            <ProductForm />
-            <ProductTable products={products} handleDelete={handleDelete} />
+            <ProductForm2 />
+            <hr />
+            {loaded && (
+                <ProductTable products={products} handleDelete={handleDelete} />
+            )}
         </>
     );
 };
