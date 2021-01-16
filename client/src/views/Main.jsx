@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from '@reach/router';
 import axios from 'axios';
 
 import ProductForm from '../components/ProductForm';
+import ProductTable from '../components/ProductTable';
 
 const Main = () => {
     const [products, setProducts] = useState([]);
@@ -14,17 +14,14 @@ const Main = () => {
             .catch(err => console.log(err));
     }, []);
 
+    const handleDelete = productId => {
+        setProducts(products.filter(product => product._id !== productId));
+    };
+
     return (
         <>
             <ProductForm />
-            <br />
-            {products.map((product, i) => {
-                return (
-                    <Link to={`/products/${product._id}`} key={i}>
-                        {product.title}
-                    </Link>
-                );
-            })}
+            <ProductTable products={products} handleDelete={handleDelete} />
         </>
     );
 };

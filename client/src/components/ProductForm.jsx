@@ -14,12 +14,12 @@ const ProductForm = () => {
                 price,
                 desc,
             })
-            .then(res => console.log(res))
+            .then(res => console.log(res.data))
             .catch(err => console.log(err));
     };
 
     return (
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={onSubmitHandler} className="my-5">
             <input
                 className="form-control"
                 type="text"
@@ -38,7 +38,9 @@ const ProductForm = () => {
                 placeholder="Description"
                 onChange={e => setDesc(e.target.value)}
             />
-            <button type="submit">Add Item</button>
+            <button className="btn btn-primary" type="submit">
+                Add Item
+            </button>
         </form>
     );
 };

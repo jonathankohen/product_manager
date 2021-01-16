@@ -23,4 +23,19 @@ module.exports = {
             .then(productData => res.json({ results: productData }))
             .catch(err => console.log(err));
     },
+
+    update_product: (req, res) => {
+        Product.findOneAndUpdate({ _id: req.params.id }, req.body, {
+            new: true,
+            useFindAndModify: false,
+        })
+            .then(updatedProduct => res.json(updatedProduct))
+            .catch(err => console.log(err));
+    },
+
+    delete_product: (req, res) => {
+        Product.deleteOne({ _id: req.params.id })
+            .then(confirmation => res.json({ results: confirmation }))
+            .catch(err => res.json(err.errors));
+    },
 };

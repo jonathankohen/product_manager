@@ -5,6 +5,7 @@ import './App.css';
 
 import Main from './views/Main';
 import Show from './views/Show';
+import Edit from './views/Edit';
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <Router>
                 <Main path="/" />
                 <Show path="/products/:id" />
+                <Edit path="/products/edit/:id" />
             </Router>
         </div>
     );
